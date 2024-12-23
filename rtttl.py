@@ -1,4 +1,3 @@
-import simpleaudio as sa
 import numpy as np
 import re
 
