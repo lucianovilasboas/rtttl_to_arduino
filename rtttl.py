@@ -55,16 +55,6 @@ def generate_tone(freq, duration, sample_rate=44100):
     return wave
 
 
-def play_melody(melody, sample_rate=44100):
-    global current_play_obj
-    audio = np.concatenate(
-        [generate_tone(freq, duration, sample_rate) for freq, duration in melody]
-    )
-    audio = (audio * 32767).astype(np.int16)  # Convert to 16-bit PCM format
-    current_play_obj = sa.play_buffer(audio, 1, 2, sample_rate)
-    current_play_obj.wait_done()
-
-
 # Funções para tocar áudio usando scipy e numpy
 def generate_tone(freq, duration, sample_rate=44100):
     if freq == 0:  # Pausa

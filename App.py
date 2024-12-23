@@ -75,6 +75,12 @@ melodias_predefinidas = {
     "Indiana Jones": "Indiana Jones:d=4,o=5,b=250:e,8p,8f,8g,8p,1c6,8p.,d,8p,8e,1f,p.,g,8p,8a,8b,8p,1f6,p,a,8p,8b,2c6,2d6,2e6,e,8p,8f,8g,8p,1c6,p,d6,8p,8e6,1f.6,g,8p,8g,e.6,8p,d6,8p,8g,e.6,8p,d6,8p,8g,f.6,8p,e6,8p,8d6,2c6",
     "James Bond": "James Bond:d=4,o=5,b=320:c,8d,8d,d,2d,c,c,c,c,8d#,8d#,2d#,d,d,d,c,8d,8d,d,2d,c,c,c,c,8d#,8d#,d#,2d#,d,c#,c,c6,1b.,g,f,1g.",
     "Star Wars": "Star Wars:d=4,o=5,b=45:32p,32f#,32f#,32f#,8b.,8f#.6,32e6,32d#6,32c#6,8b.6,16f#.6,32e6,32d#6,32c#6,8b.6,16f#.6,32e6,32d#6,32e6,8c#.6,32f#,32f#,32f#,8b.,8f#.6,32e6,32d#6,32c#6,8b.6,16f#.6,32e6,32d#6,32c#6,8b.6,16f#.6,32e6,32d#6,32e6,8c#6",
+    "Mozzart": "we-rock:d=4,o=6,b=140:32d#.5,32d.5,32d#.5,8f#.5,32g#.5,32f#.5,32f.5,32f#.5,8a#.5,16b5,16a#5,16a5,16a#5,16f6,16d#6,16d6,16d#6,16f6,16d#6,16d6,16d#6,8f#.6,8d#6,8f#6,32c#6,32d#6,16f6,8d#6,8c#6,8d#6,32c#6,32d#6,16f6,8d#6,8c#6,8d#6,32c#6,32d#6,16f6,8d#6,8c#6,8c6,4a#5,16f5,32d#5,16d5,16d#5,4f#5,16g#5,16f#5,16f5,16f#5,4a#5,16b5,16a#5,16a5,16a#5,16f6,16d#6,16d6,16d#6,16f6,16d#6,16d6,16d#6,4f#6,8d#6,8f#6,32c#6,32d#6,16f6,8d#6,8c#6,8d#6,32c#6,32d#6,16f6,8d#6,8c#6,8d#6,32c#6,32d#6,16f6,8d#6,8c#6,8c6,4a#5,8a#5,8b5,8c#6,8c#6,16d#6,16c#6,16b5,",
+    "Matrix": "Matrix:d=4,o=6,b=50:32c#5,32d#5,16g#5,16c#5,16c#5,16g#5,16g#5,16g5,32d#5,32f5,16g5,16d#5,16f5,16g5,16c#5,16g#5,16c#5,16c#5,16g#5,16g#5,16g5,16f5,d#5,32c#5,32d#5,16g#5,16c#5,16c#5,16g#5,16g#5,16g5,32d#5,32f5,16g5,16f5,16g5,16g#5,16c,16a#5,16g#5,16a#5,16g#5,16g5",
+    "The X Files": "The X Files:d=4,o=5,b=112:16c,16d#,16g,8g#,2p,8p,c,c,c,c,g,f,g,a#,16g,16d#,16g,8g#,2p,p,2d.6,d#6,d6,c6,a#,d6,2g.,d#6,d6,c6,a#,d6,1g,16c,16d#,16g,8g#,2p,p,c,c,c",
+    "Beatles - All you need is love": "Beatles - All you need is love:d=4,o=5,b=140:8g6,16p,8g6,8g6,16p,8g6,16p,16p,8g6,2p,16b6,16p,16p,8a#6,8a6,16g#6,8g6,p,8g6,16p,8g6,8g6,16p,8g6,8p,8g6,p,8p,8b6,16p,8a#6,16a6,8g#6,8g6,p,8g6,16p,8g6,8g#6,16p,8g#6,8p,a6,p,2e6,p,8d6,16e6,8d6,8p,16c6,8c6,",
+    "X-Men-Them": "X-Men-Them:d=4,o=6,b=70:32g,32c,32d,32d_,8d,16c,g,32g,32c.,32d,32d_,8d,16c,g_,32g,32c,32d,32d_.,8d,16c,2d_,16d,2c,32c,32f,32g,32g_.,8g,16f,8c.,32c,32f,32g,32g_,8g,16f,8c_,32g,32c.,32d,32d_.,8d,16c,2d_,16d,16c",
+    "X-MenCarto": "X-MenCarto:d=4,o=6,b=125:8c,8c,8d_,8c,8d_,8d_,8f,8d_,8c,8c,8d_,8c,8d_,8d_,8f,8d_,8c,8c,8d_,8c,8d_,8d_,8f,8d_,8c,8c,8d_,8c,d_,8g5,16c,16d_,d,8c,2g5,16c,16d_,d,8c,2g_5,16c,16d_,d,8c,d_,8p,g5,c,8p",
 }
 
 melodia_selecionada = st.selectbox(
@@ -173,7 +179,12 @@ else:
 st.markdown(
     """
 <footer style='text-align: center; margin-top: 50px;'>
-    <p>Inspirado no <a href='https://eddmann.com/nokia-composer-web/' target='_blank' style='color: #4CAF50;'>RTTTL to Arduino</a>.</p>
+    <p>Inspirado em:<br> 
+        <a href='https://eddmann.com/nokia-composer-web/' target='_blank' style='color: #4CAF50;'>Nokia Composer Web</a>.<br>
+        <a href='https://adamonsoon.github.io/rtttl-play/' target='_blank' style='color: #4CAF50;'>RTTTL Play</a>.<br>
+        <a href='https://en.wikipedia.org/wiki/Ring_Tone_Text_Transfer_Language' target='_blank' style='color: #4CAF50;'>RTTTL Wiki</a>.<br>
+        <a href='https://picaxe.com/rtttl-ringtones-for-tune-command/' target='_blank' style='color: #4CAF50;'>Baixe Tons aqui</a>.<br>
+    </p>
 </footer>
 """,
     unsafe_allow_html=True,
