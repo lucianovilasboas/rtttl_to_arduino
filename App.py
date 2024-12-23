@@ -165,7 +165,7 @@ if codigo_rtttl:
 
     try:
         st.markdown(
-            f"<p style='color: #4CAF50;'>🎶 Tocando: {codigo_rtttl.split(":")[0]}</p>",
+            f"<h2 style='color: #4CAF50;'>🎶 Tocar {codigo_rtttl.split(":")[0]}</h2>",
             unsafe_allow_html=True,
         )
         melody = parse_rtttl(codigo_rtttl)
@@ -175,17 +175,117 @@ if codigo_rtttl:
 else:
     st.error("Insira um código RTTTL válido!")
 
+
+# from music21 import stream, note, tempo, duration
+# from fractions import Fraction
+
+
+# def convert_to_expressible_duration(duration_ms, bpm):
+#     # Duração de uma semínima em milissegundos
+#     quarter_note_ms = 60000 / bpm
+#     if not isinstance(duration_ms, (int, float)) or duration_ms <= 0:
+#         raise ValueError(
+#             f"Duração inválida: {duration_ms}. Deve ser um número positivo."
+#         )
+#     if not isinstance(quarter_note_ms, (int, float)):
+#         raise ValueError(f"Duração de semínima inválida: {quarter_note_ms}.")
+
+#     # Converter duração em tempos musicais (fração da semínima)
+#     quarter_length = Fraction(duration_ms, quarter_note_ms)
+
+#     # Aproximar para valores expressáveis
+#     expressible_durations = [1, 0.5, 0.25, 0.125, 0.0625]  # Semínima, colcheia, etc.
+#     closest_duration = min(
+#         expressible_durations, key=lambda x: abs(x - float(quarter_length))
+#     )
+#     return closest_duration
+
+
+# def generate_sheet_music(melody, bpm=120):
+#     # Criar o objeto de partitura
+#     score = stream.Score()
+#     part = stream.Part()
+
+#     # Definir o tempo (BPM)
+#     tempo_mark = tempo.MetronomeMark(number=bpm)
+#     part.append(tempo_mark)
+
+#     # Processar cada nota
+#     for freq, dur in melody:
+#         if freq == 0:
+#             # Pausa
+#             new_note = note.Rest()
+#         else:
+#             # Converter frequência para nota musical
+#             note_name = freq_to_note_name(freq)
+#             new_note = note.Note(note_name)
+
+#         # Ajustar a duração para um valor expressável
+#         try:
+#             quarter_length = convert_to_expressible_duration(dur, bpm)
+#             new_note.duration = duration.Duration(quarter_length)
+#             part.append(new_note)
+#         except ValueError as e:
+#             st.error(f"Erro ao processar nota {freq} Hz com duração {dur}: {e}")
+#             continue
+
+#     # Adicionar a parte à partitura
+#     score.append(part)
+#     return score
+
+
+# if codigo_rtttl:
+#     try:
+#         # Parse RTTTL e converte para melodia
+#         melody = parse_rtttl(codigo_rtttl)
+
+#         # Gerar a partitura
+#         score = generate_sheet_music(melody, bpm=120)
+
+#         # Exibir a partitura
+#         st.markdown(
+#             "<h2 style='color: #4CAF50;'>🎼 Partitura Gerada:</h2>",
+#             unsafe_allow_html=True,
+#         )
+#         score.show(
+#             "musicxml.png"
+#         )  # Exibe como imagem (usando MuseScore instalado no sistema)
+
+#         # Salvar como arquivo MusicXML
+#         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".musicxml")
+#         score.write("musicxml", temp_file.name)
+#         st.download_button(
+#             label="Baixar Partitura (MusicXML)",
+#             data=open(temp_file.name, "rb").read(),
+#             file_name="partitura.musicxml",
+#             mime="application/vnd.recordare.musicxml+xml",
+#         )
+#     except Exception as e:
+#         st.error(f"Erro ao gerar a partitura: {e}")
+
+
 # Rodapé
 st.markdown(
     """
-<footer style='text-align: center; margin-top: 50px;'>
+    <footer style='text-align: center; margin-top: 50px;'>
     <p>Inspirado em:<br> 
-        <a href='https://eddmann.com/nokia-composer-web/' target='_blank' style='color: #4CAF50;'>Nokia Composer Web</a>.<br>
-        <a href='https://adamonsoon.github.io/rtttl-play/' target='_blank' style='color: #4CAF50;'>RTTTL Play</a>.<br>
-        <a href='https://en.wikipedia.org/wiki/Ring_Tone_Text_Transfer_Language' target='_blank' style='color: #4CAF50;'>RTTTL Wiki</a>.<br>
-        <a href='https://picaxe.com/rtttl-ringtones-for-tune-command/' target='_blank' style='color: #4CAF50;'>Baixe Tons aqui</a>.<br>
+        <a href='https://eddmann.com/nokia-composer-web/' target='_blank' style='color: #4CAF50;'>Nokia Composer Web</a>,
+        <a href='https://adamonsoon.github.io/rtttl-play/' target='_blank' style='color: #4CAF50;'>RTTTL Play</a>.    
     </p>
-</footer>
-""",
+    </footer>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <footer style='text-align: center; margin-top: 50px;'>
+    <p>Outros links:<br> 
+        <a href='https://en.wikipedia.org/wiki/Ring_Tone_Text_Transfer_Language' target='_blank' style='color: #4CAF50;'>RTTTL Wiki</a>, 
+        <a href='https://kunstderfuge.com/ringtones.htm' target='_blank' style='color: #4CAF50;'>RTTTL Ringtones</a>,
+        <a href='https://picaxe.com/rtttl-ringtones-for-tune-command/' target='_blank' style='color: #4CAF50;'>Baixe Tons aqui</a>.
+    </p>
+    </footer>
+    """,
     unsafe_allow_html=True,
 )
