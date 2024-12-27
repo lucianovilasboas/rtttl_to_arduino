@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from rtttl import (
     freq_to_note_name,
     generate_tone,
@@ -57,14 +58,24 @@ Insira um código RTTTL e visualize seu equivalente em código Arduino ou toque 
 ### Exemplo de código RTTTL:
 
 ```plaintext
-Flinstones:d=4,o=5,b=40:32p,16f6,16a#,16a#6,32g6,16f6,16a#.,16f6,32d#6,32d6,32d6,32d#6,32f6,16a#,16c6,d6,16f6,16a#.,16a#6,32g6,16f6,16a#.,32f6,32f6,32d#6,32d6,32d6,32d#6,32f6,16a#,16c6,a#,16a6,16d.6,16a#6,32a6,32a6,32g6,32f#6,32a6,8g6,16g6,16c.6,32a6,32a6,32g6,32g6,32f6,32e6,32g6,8f6,16f6,16a#.,16a#6,32g6,16f6,16a#.,16f6,32d#6,32d6,32d6,32d#6,32f6,16a#,16c.6,32d6,32d#6,32f6,16a#,16c.6,32d6,32d#6,32f6,16a#6,16c7,8a#.6
+Flinstones:d=4,o=5,b=40:32p,16f6,16a#,16a#6,32g6,16f6,16a#.,16f6,32d#6,32d6,32d6,32d#6,32f6,16a#,16c6,d6,16f6,16a#.,
+16a#6,32g6,16f6,16a#.,32f6,32f6,32d#6,32d6,32d6,32d#6,32f6,16a#,16c6,a#,16a6,16d.6,16a#6,32a6,32a6,32g6,32f#6,32a6,
+8g6,16g6,16c.6,32a6,32a6,32g6,32g6,32f6,32e6,32g6,8f6,16f6,16a#.,16a#6,32g6,16f6,16a#.,16f6,32d#6,32d6,32d6,32d#6,32f6,
+16a#,16c.6,32d6,32d#6,32f6,16a#,16c.6,32d6,32d#6,32f6,16a#6,16c7,8a#.6
 ```
 ---
 
-Vamos criar música juntos! 🎵
+Então vamos lá!!! 🎵🎵🎵
 """
 )
 st.write("---")
+with st.container():
+    st.markdown(
+        "<h2 style='color: #4CAF50;'>🎶 Veja uma lista com várias melodias</h2>",
+        unsafe_allow_html=True,
+    )
+    st.dataframe(pd.read_csv("rtttl_songs.psv", sep="|"), use_container_width=True)
+    st.write("---")
 
 
 melodias_predefinidas = {
@@ -84,7 +95,7 @@ melodias_predefinidas = {
 }
 
 melodia_selecionada = st.selectbox(
-    "Escolha uma melodia pré-definida:",
+    "Escolha uma melodia (ou copie da lista acima ou crie a sua própria melodia):",
     ["Selecione..."] + list(melodias_predefinidas.keys()),
 )
 
@@ -165,7 +176,7 @@ if codigo_rtttl:
 
     try:
         st.markdown(
-            f"<h2 style='color: #4CAF50;'>🎶 Tocar {codigo_rtttl.split(":")[0]}</h2>",
+            f"<h2 style='color: #4CAF50;'>🎵 Tocar {codigo_rtttl.split(":")[0]}</h2>",
             unsafe_allow_html=True,
         )
         melody = parse_rtttl(codigo_rtttl)
@@ -174,94 +185,6 @@ if codigo_rtttl:
         st.error(f"Erro ao tocar RTTTL: {e}")
 else:
     st.error("Insira um código RTTTL válido!")
-
-
-# from music21 import stream, note, tempo, duration
-# from fractions import Fraction
-
-
-# def convert_to_expressible_duration(duration_ms, bpm):
-#     # Duração de uma semínima em milissegundos
-#     quarter_note_ms = 60000 / bpm
-#     if not isinstance(duration_ms, (int, float)) or duration_ms <= 0:
-#         raise ValueError(
-#             f"Duração inválida: {duration_ms}. Deve ser um número positivo."
-#         )
-#     if not isinstance(quarter_note_ms, (int, float)):
-#         raise ValueError(f"Duração de semínima inválida: {quarter_note_ms}.")
-
-#     # Converter duração em tempos musicais (fração da semínima)
-#     quarter_length = Fraction(duration_ms, quarter_note_ms)
-
-#     # Aproximar para valores expressáveis
-#     expressible_durations = [1, 0.5, 0.25, 0.125, 0.0625]  # Semínima, colcheia, etc.
-#     closest_duration = min(
-#         expressible_durations, key=lambda x: abs(x - float(quarter_length))
-#     )
-#     return closest_duration
-
-
-# def generate_sheet_music(melody, bpm=120):
-#     # Criar o objeto de partitura
-#     score = stream.Score()
-#     part = stream.Part()
-
-#     # Definir o tempo (BPM)
-#     tempo_mark = tempo.MetronomeMark(number=bpm)
-#     part.append(tempo_mark)
-
-#     # Processar cada nota
-#     for freq, dur in melody:
-#         if freq == 0:
-#             # Pausa
-#             new_note = note.Rest()
-#         else:
-#             # Converter frequência para nota musical
-#             note_name = freq_to_note_name(freq)
-#             new_note = note.Note(note_name)
-
-#         # Ajustar a duração para um valor expressável
-#         try:
-#             quarter_length = convert_to_expressible_duration(dur, bpm)
-#             new_note.duration = duration.Duration(quarter_length)
-#             part.append(new_note)
-#         except ValueError as e:
-#             st.error(f"Erro ao processar nota {freq} Hz com duração {dur}: {e}")
-#             continue
-
-#     # Adicionar a parte à partitura
-#     score.append(part)
-#     return score
-
-
-# if codigo_rtttl:
-#     try:
-#         # Parse RTTTL e converte para melodia
-#         melody = parse_rtttl(codigo_rtttl)
-
-#         # Gerar a partitura
-#         score = generate_sheet_music(melody, bpm=120)
-
-#         # Exibir a partitura
-#         st.markdown(
-#             "<h2 style='color: #4CAF50;'>🎼 Partitura Gerada:</h2>",
-#             unsafe_allow_html=True,
-#         )
-#         score.show(
-#             "musicxml.png"
-#         )  # Exibe como imagem (usando MuseScore instalado no sistema)
-
-#         # Salvar como arquivo MusicXML
-#         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".musicxml")
-#         score.write("musicxml", temp_file.name)
-#         st.download_button(
-#             label="Baixar Partitura (MusicXML)",
-#             data=open(temp_file.name, "rb").read(),
-#             file_name="partitura.musicxml",
-#             mime="application/vnd.recordare.musicxml+xml",
-#         )
-#     except Exception as e:
-#         st.error(f"Erro ao gerar a partitura: {e}")
 
 
 # Rodapé
